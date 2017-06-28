@@ -1,18 +1,19 @@
-node('docker') {
+node {
     checkout scm
-    stage('Build') {
-         docker.image('node:6.3').inside {
-        sh 'npm --version'
-    }
-    }
-    stage('Test') {
-        steps {
-            echo 'Testing..'
+    docker.image('node:6.3').inside {
+        stage('Build') {
+
+            sh 'npm --version'
         }
-    }
-    stage('Deploy') {
-    steps {
-        echo 'Deploying....'
+        stage('Test') {
+            steps {
+                echo 'Testing..'
+            }
+        }
+        stage('Deploy') {
+        steps {
+            echo 'Deploying....'
+            }
         }
     }
 }
