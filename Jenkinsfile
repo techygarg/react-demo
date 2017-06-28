@@ -1,10 +1,10 @@
 pipeline {
-    agent any
-
+ agent { docker 'node:6.11.0' }
     stages {
         stage('Build') {
             steps {
                 echo 'Building..'
+                sh 'npm --version'
             }
         }
         stage('Test') {
