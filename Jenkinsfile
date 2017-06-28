@@ -1,21 +1,19 @@
-pipeline {
- agent { docker 'node:6.11.0' }
-    stages {
-        stage('Build') {
-            steps {
-                echo 'Building..'
-                sh 'npm --version'
-            }
+node('docker') {
+    checkout scm
+    stage('Build') {
+         docker.image('node:6.3').inside {
+        sh 'npm --version'
+    }
+    }
+    stage('Test') {
+        steps {
+            echo 'Testing..'
         }
-        stage('Test') {
-            steps {
-                echo 'Testing..'
-            }
-        }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying....'
-            }
+    }
+    stage('Deploy') {
+    steps {
+        echo 'Deploying....'
         }
     }
 }
+
